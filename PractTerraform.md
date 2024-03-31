@@ -87,13 +87,13 @@ resource "docker_container" "wordpress" {
 }
 ```
 Se especifica la configuración del container que contendrá esa imagen de wordpress anteriormente declarada. 
-image = docker_image.wordpress.image_id --> utiliza la imagen de wordpress declarada en docker_image antes.
-name  = var.container_name --> utiliza la variable de entorno definida en el fichero variables.tf
-En el apartado de ports se mapea el puerto 80 del container con el puerto 8001 de nuestra máquina (localhost) para poder posteriormente visualizarlo
-depends_on = [docker_container.mariadb] --> Se declara que se construya antes el container de mariadb antes que el de wordpress ya que éste depende de mariadb
-En el apartado de env se declaran las variables de entorno que contiene el wordpress que hemos definido (similar a la práctica de Docker)
-En el apartado de networks_advanced se asigna esa red a través de la cual se comunicarán los containers previamente declarada
-En el apartado de volumes se asigna la ruta en la que se almacenarán esos datos y el nombre del mismo previamente definido
+- image = docker_image.wordpress.image_id --> utiliza la imagen de wordpress declarada en docker_image antes.
+- name  = var.container_name --> utiliza la variable de entorno definida en el fichero variables.tf
+- En el apartado de ports se mapea el puerto 80 del container con el puerto 8001 de nuestra máquina (localhost) para poder posteriormente visualizarlo
+- depends_on = [docker_container.mariadb] --> Se declara que se construya antes el container de mariadb antes que el de wordpress ya que éste depende de mariadb
+- En el apartado de env se declaran las variables de entorno que contiene el wordpress que hemos definido (similar a la práctica de Docker)
+- En el apartado de networks_advanced se asigna esa red a través de la cual se comunicarán los containers previamente declarada
+- En el apartado de volumes se asigna la ruta en la que se almacenarán esos datos y el nombre del mismo previamente definido
 ```
 resource "docker_container" "mariadb" {
   image = docker_image.mariadb.image_id
@@ -116,11 +116,11 @@ resource "docker_container" "mariadb" {
   }
 }
 ```
-image = docker_image.mariadb.image_id --> utiliza la imagen de mariadb declarada en docker_image antes.
-name  = "mariadb" --> se declara el nombre que tendrá ese container
-En el apartado de env se declaran las variables de entorno que contiene el container de mariadb (similar a la práctica de Docker)
-En el apartado de networks_advanced se asigna esa red a través de la cual se comunicarán los containers previamente declarada
-En el apartado de volumes se asigna la ruta en la que se almacenarán esos datos y el nombre del mismo previamente definido
+- image = docker_image.mariadb.image_id --> utiliza la imagen de mariadb declarada en docker_image antes.
+- name  = "mariadb" --> se declara el nombre que tendrá ese container
+- En el apartado de env se declaran las variables de entorno que contiene el container de mariadb (similar a la práctica de Docker)
+- En el apartado de networks_advanced se asigna esa red a través de la cual se comunicarán los containers previamente declarada
+- En el apartado de volumes se asigna la ruta en la que se almacenarán esos datos y el nombre del mismo previamente definido
 # Fichero variables.tf #
 ```
 variable "container_name" {
@@ -130,9 +130,9 @@ variable "container_name" {
 }
 ```
 Se declara la variable que especificará el nombre que llevará el container de wordpress.
-description = "Value of the name for the Docker container" --> Simple descripción para declarar qué se está configurando
-type        = string --> una cadena de texto
-default     = "WordPressContainer" --> si no se especifica ningún nombre, el predeterminado será WordPressContainer
+- description = "Value of the name for the Docker container" --> Simple descripción para declarar qué se está configurando
+- type        = string --> una cadena de texto
+- default     = "WordPressContainer" --> si no se especifica ningún nombre, el predeterminado será WordPressContainer
 
 # Despliegue de Terraform #
 1. Se inicia Docker Desktop y se ejecuta terraform init
